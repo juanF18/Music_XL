@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { LoggedNavigation } from "./routes";
+import { Auth } from "./pages";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+  //Estado donde se almacena el usuario
+  const [user, setUser] = useState(undefined);
+  //Datos del usuario (si esta ya registrado)
+  const auth = getAuth();
+
+  //Nos dice si el ususario ya esta registrado o no
+  onAuthStateChanged(auth, (user) => {
+    setUser(user);
+  });
+
+  //Si el usuario no existe no retorna nada
+  if (user === undefined) return null;
+
+  /*Si el usuario existe retorna la pagina de logeado, si no existe 
+  nos lleva a la pagina para registrarse o logearse.*/
+  return user ? <LoggedNavigation /> : <Auth />;
 }
-
-export default App;
