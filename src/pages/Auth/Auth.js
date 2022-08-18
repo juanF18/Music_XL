@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image } from "semantic-ui-react";
 import { AuthOptions, LoginForm, RegisterForm } from "../../components/Auth";
-import { logoNameWhite, backgroundAuth } from "../../assets";
+import { logoNameWhite } from "../../assets";
 import "./Auth.scss";
 
 /**

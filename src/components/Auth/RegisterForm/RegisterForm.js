@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { Form, Icon } from "semantic-ui-react";
 import { initialValues, validatioSchema } from "./RegisterForm.data";
+import { Auth } from "../../../api";
 import "./RegisterForm.scss";
+
+/**
+ * Creacion de un nuevo Objeto Auth para registrar
+ *  un usuario
+ */
+const auth = new Auth();
 
 export function RegisterForm(props) {
   //Recuperacion en props de las funciones de ir al login
   // y de ir a la pagina incial
   const { openLogin, goBack } = props;
+
+  const [showPassword, setShowPassword] = useState(false);
+  /**
+   * Funcion para cambiar el valor del estado actual
+   * a su negado para poder cambiar el icono y si se
+   * puede ver la password o no
+   * Nota (no necesariamete se tiene que llamar estado anterior)
+   * @returns retorna la negacion del estado de showPassword
+   */
+  const onShowHidenPassword = () => setShowPassword((prevState) => !prevState);
 
   /**
    * formik hacer un control de los campos de valores
@@ -20,9 +37,12 @@ export function RegisterForm(props) {
     initialValues: initialValues(),
     validationSchema: validatioSchema(),
     validateOnChange: false,
-    onSubmit: (formValue) => {
-      console.log("Registro OK");
-      console.log(formValue);
+    onSubmit: async (formValue) => {
+      try {
+        await auth.register(formValue.email, formValue.password);
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
 
@@ -41,13 +61,13 @@ export function RegisterForm(props) {
         />
         <Form.Input
           name="password"
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Contraseña"
           icon={
             <Icon
-              name="eye"
+              name={showPassword ? "eye slash" : "eye"}
               link
-              onClick={() => console.log("show password")}
+              onClick={onShowHidenPassword}
             />
           }
           onChange={formik.handleChange}
@@ -63,7 +83,7 @@ export function RegisterForm(props) {
           value={formik.values.username}
           error={formik.errors.username}
         />
-        <Form.Button type="submit" primary fluid>
+        <Form.Button type="submit" primary fluid loading={formik.isSubmitting}>
           Continuar
         </Form.Button>
       </Form>
