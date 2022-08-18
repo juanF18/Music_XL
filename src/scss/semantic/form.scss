@@ -1,0 +1,45 @@
+/* 
+* Estilos generalizados para todos los formularios
+* y el boton principal del formulario, tambien se
+* le da estilos al error en los formularios
+*/
+
+.ui.form {
+  .field {
+    .input {
+      input {
+        background-color: $background-secondary;
+        border-color: $background-secondary;
+        color: $font-light;
+
+        //Cuando esta encima, cuando se activa o cuando se le
+        //hace focus a el input
+        &:hover,
+        &:active,
+        &:focus {
+          background-color: $background-secondary;
+        }
+      }
+      i {
+        color: $font-light;
+      }
+    }
+    .ui.button.primary {
+      background-color: $primary-color;
+      color: $font-light;
+      border-radius: 100px;
+    }
+  }
+  .field.error {
+    .ui.input {
+      input {
+        background-color: $background-secondary;
+        border: 1px solid $danger;
+        color: $danger-text;
+      }
+      i {
+        color: $danger;
+      }
+    }
+  }
+}

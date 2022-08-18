@@ -1,17 +1,22 @@
 import React from "react";
 import { Button } from "semantic-ui-react";
+import "./AuthOptions.scss";
 
 export function AuthOptions(props) {
+  /**
+   * Recuperacion por props las funciones
+   * para moverse entre los distintos formularios
+   */
   const { openLogin, openRegister } = props;
   return (
-    <div style={{ backgroundColor: "#000" }}>
-      <h1>Auth Options</h1>
+    <div className="auth-options">
+      <h1>Millones de canciones gratis!!</h1>
 
-      <Button primary onClick={openRegister}>
-        Register
+      <Button className="register" onClick={openRegister}>
+        Registrate ahora
       </Button>
-      <Button secondary onClick={openLogin}>
-        Login
+      <Button className="login" onClick={openLogin}>
+        Inicia sesion
       </Button>
     </div>
   );

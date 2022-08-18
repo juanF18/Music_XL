@@ -1,7 +1,8 @@
 @import "./index.scss";
+@import "./semantic/index.scss";
 
 *,
 a,
-p{
-    color: $font-light;
+p {
+  color: $font-light;
 }
