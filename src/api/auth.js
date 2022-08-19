@@ -1,4 +1,8 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 export class Auth {
   /**
@@ -12,6 +16,20 @@ export class Auth {
     try {
       const auth = getAuth();
       await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * Funcion para cerrar sesion, trae el usuario actual y
+   * cierra la seion
+   */
+
+  async logOut() {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
     } catch (error) {
       throw error;
     }
