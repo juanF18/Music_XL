@@ -1,6 +1,6 @@
 import React from "react";
 import "./LoggedLayout.scss";
-import { LeftMenu } from "../../components/Layout";
+import { LeftMenu, TopBar } from "../../components/Layout";
 
 export function LoggedLayout(props) {
   /**
@@ -18,7 +18,7 @@ export function LoggedLayout(props) {
 
         <div className="logged-layout__children-content">
           <div className="logged-layout__top-bar">
-            <p>TOP BAR</p>
+            <TopBar />
           </div>
           <div>{children}</div>
         </div>

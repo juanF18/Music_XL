@@ -35,7 +35,6 @@ export function LeftMenu() {
           active={isCurrentPage("/albums")}
         />
       </Menu>
-      <div></div>
 
       <Menu secondary vertical fluid>
         <Menu.Item
